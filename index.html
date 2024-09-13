@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es" style="width: 100%; height: 100%">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos.css" />
+    <title>Anotador de truco</title>
+  </head>
+  <body class="fondo" style="width: 100%; height: 100%; margin: 0px">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      
+      $(document).ready(function () {
+        var cont1 = 0;
+        var cont2 = 0;
+        contj1 = 0;
+        contj3 = 0;
+        contj5 = 0;
+
+        contj2 = 0;
+        contj4 = 0;
+        contj6 = 0;
+
+        $("#iniciar").on("click", fnpasa2);
+        $("#mas1").on("click", sumae1);
+        $("#mas2").on("click", sumae2);
+        $("#res1").on("click", restae1);
+        $("#res2").on("click", restae2);
+
+        $("#masj1").on("click",sumaje1);
+        $("#resj1").on("click",restaje1);
+        $("#masj3").on("click",sumaje3);
+        $("#resj3").on("click",restaje3);
+        $("#masj5").on("click",sumaje5);
+        $("#resj5").on("click",restaje5);
+
+        $("#masj2").on("click",sumaje2);
+        $("#resj2").on("click",restaje2);
+        $("#masj4").on("click",sumaje4);
+        $("#resj4").on("click",restaje4);
+        $("#masj6").on("click",sumaje6);
+        $("#resj6").on("click",restaje6);
+
+        $(".puntuacion").on("click", actualizarPuntuacion);
+        $("#a15").on("click", fna15);
+        $("#a24").on("click", fna24);
+        $("#a30").on("click", fna30);
+        $("#iniciar").on("click", fnactualizarobjetivo);
+        $("#mas1, #res1").on("click", palitos1);
+        $("#mas2, #res2").on("click", palitos2);
+        $("#reiniciar").on("click", reiniciar);
+        $("#fin").on("click", fnpasa1)
+
+        function fnpasa1()
+        {
+          acuanto=30;
+          cont1=0;
+          cont2=0;
+          QPP=0;
+          for (var i = 1; i < 7; i++) 
+          {  
+            $('#p1'+i).attr('src','0.png')
+            $('#p2'+i).attr('src','0.png')
+          } 
+          $("#puntuacion1").text(cont1);
+          $("#puntuacion2").text(cont2);
+          $("#nombre1").val("");
+          $("#nombre2").val("");
+          $("#pant1").removeClass("oculto").addClass("visible");
+          $("#pant2").removeClass("visible").addClass("oculto");
+
+          
+        }
+
+        function reiniciar()
+        {
+          for (var i = 1; i < 7; i++) 
+          {  
+            $('#p1'+i).attr('src','0.png')
+            $('#p2'+i).attr('src','0.png')
+          } 
+          cont1=0;
+          cont2=0;
+          QPP=0;
+          $("#puntuacion1").text(cont1);
+          $("#puntuacion2").text(cont2);
+          console.log("QPP = "+ QPP);
+          console.log("Cont1 = "+ cont1);
+          console.log("Cont2 = "+ cont2);
+          console.log("funcion reiniciar");
+        }
+        
+        acuanto = 30;
+        console.log("Se juega a " + acuanto);
+        function fna30() {
+          acuanto = 30;
+          console.log("Se juega a " + acuanto);
+        }
+
+        function fna24() {
+          acuanto = 24;
+          console.log("Se juega a " + acuanto);
+        }
+
+        function fna15() {
+          acuanto = 15;
+          console.log("Se juega a " + acuanto);
+        }
+
+        function actualizarPuntuacion() {
+          $("#puntuacion1").text(cont1);
+          $("#puntuacion2").text(cont2);
+
+          $("#puntj1").html(punta1+"= " + contj1);
+          $("#puntj3").html(punta3+"= " + contj3);
+          $("#puntj5").html(punta5+"= " + contj5);
+
+          $("#puntj2").html(punta2+"= " + contj2);
+          $("#puntj4").html(punta4+"= " + contj4);
+          $("#puntj6").html(punta6+"= " + contj6);
+          
+        }
+
+        function fnactualizarobjetivo() {
+          $("#objetivo").text("Se juega a "+acuanto);
+        }
+
+        function fnpasa2() {
+          //nombres
+
+          ne1 = $("#nombre1").val();
+          $("#ne1p2").text(ne1);
+
+          ne2 = $("#nombre2").val();
+          $("#ne2p2").html(ne2);
+
+          punta1 =$("#punta1").val();
+          punta3 = $("#punta3").val();  
+          punta5 =$("#punta5").val();
+          //nombres pica pica
+          punta2 =$("#punta2").val();
+          punta4 =$("#punta4").val();
+          punta6 =$("#punta6").val();
+          
+          $("#J1").text(punta1);
+          $("#J3").text(punta3);
+          $("#J5").text(punta5);
+          //
+          $("#J2").text(punta2);
+          $("#J4").text(punta4);
+          $("#J6").text(punta6);
+
+          $("#pant1").removeClass("visible").addClass("oculto");
+          $("#pant2").removeClass("oculto").addClass("visible");
+
+          $("#puntj1").html(punta1+"= " + contj1);
+          $("#puntj3").html(punta3+"= " + contj3);
+          $("#puntj5").html(punta5+"= " + contj5);
+
+          $("#puntj2").html(punta2+"= " + contj2);
+          $("#puntj4").html(punta4+"= " + contj4);
+          $("#puntj6").html(punta6+"= " + contj6);
+        }
+
+        function sumae1() {
+          if (cont1 < acuanto) {
+            cont1 += 1;
+            console.log(cont1);
+          }
+          if (acuanto == 24 && cont1 > 24) {
+            cont1 = 24;
+            console.log(cont1);
+          }
+          if (acuanto==15 && cont1 > 15)
+          {
+            cont1=15;
+          }
+
+          if (acuanto==30 && cont1>=30)
+          {
+            alert("Ganó el equipo: "+ ne1);
+          }
+          if (acuanto==24 && cont1>=24)
+          {
+            alert("Ganó el equipo: "+ ne1);
+          }
+          if (acuanto==15 && cont1>=15)
+          {
+            alert("Ganó el equipo: "+ ne1);
+          }
+        }
+
+        function sumaje1()
+        {
+            cont1+=1;
+            contj1+=1;
+
+            if (contj1>acuanto)
+            {
+              contj1 = acuanto;
+            }
+            if (cont1>acuanto)
+            {
+              cont1 = acuanto;
+            }
+            
+            
+            palitos1();
+            console.log("Puntos de "+punta1+ "= "+ contj1)
+        }
+        
+        function sumaje3()
+        {
+            cont1+=1;
+            contj3+=1;
+
+            if (contj3>acuanto)
+            {
+              contj3 = acuanto;
+            }
+            if (cont1>acuanto)
+            {
+              cont1 = acuanto;
+            }
+            
+            
+            palitos1();
+            console.log("Puntos de "+punta3+ "= "+ contj3)
+        }
+
+        function sumaje5()
+        {
+            cont1+=1;
+            contj5+=1;
+
+            if (contj5>acuanto)
+            {
+              contj5 = acuanto;
+            }
+            if (cont1>acuanto)
+            {
+              cont1 = acuanto;
+            }
+            
+            
+            palitos1();
+            console.log("Puntos de "+punta5+ "= "+ contj5)
+        }
+
+        function restaje5()
+        {
+          cont1-=1;
+          contj5-=1;
+
+          if (cont1<0)
+            {
+              cont1 = 0;
+            }
+
+            if (contj5<0)
+            {
+              contj5 = 0;
+            }
+            palitos1();
+            console.log("Puntos de "+punta1+ "= "+ contj5)
+        }
+
+        function restaje3()
+        {
+          cont1-=1;
+          contj3-=1;
+
+          if (cont1<0)
+            {
+              cont1 = 0;
+            }
+
+            if (contj3<0)
+            {
+              contj3 = 0;
+            }
+            palitos1();
+            console.log("Puntos de "+punta3+ "= "+ contj3)
+        }
+        
+        function restaje1()
+        {
+          cont1-=1;
+          contj1-=1;
+
+          if (cont1<0)
+            {
+              cont1 = 0;
+            }
+
+            if (contj1<0)
+            {
+              contj1 = 0;
+            }
+            palitos1();
+            console.log("Puntos de "+punta1+ "= "+ contj1)
+        }
+
+        function sumaje2()
+        {
+            cont2+=1;
+            contj2+=1;
+
+            if (contj2>acuanto)
+            {
+              contj2 = acuanto;
+            }
+            if (cont2>acuanto)
+            {
+              cont2 = acuanto;
+            }
+            
+            
+            palitos2();
+            console.log("Puntos de "+punta2+ "= "+ contj2)
+        }
+
+        function restaje2()
+        {
+          cont2-=1;
+          contj2-=1;
+
+          if (cont2<0)
+            {
+              cont2 = 0;
+            }
+
+            if (contj2<0)
+            {
+              contj2 = 0;
+            }
+            palitos2();
+            console.log("Puntos de "+punta2+ "= "+ contj2)
+        }
+       
+        function sumaje4()
+        {
+            cont2+=1;
+            contj4+=1;
+
+            if (contj4>acuanto)
+            {
+              contj4 = acuanto;
+            }
+            if (cont2>acuanto)
+            {
+              cont2 = acuanto;
+            }
+            
+            
+            palitos2();
+            console.log("Puntos de "+punta4+ "= "+ contj4)
+        }
+       
+        function restaje4()
+        {
+          cont2-=1;
+          contj4-=1;
+
+          if (cont2<0)
+            {
+              cont2 = 0;
+            }
+
+            if (contj4<0)
+            {
+              contj4 = 0;
+            }
+            palitos2();
+            console.log("Puntos de "+punta4+ "= "+ contj4)
+        }
+
+        function sumaje6()
+        {
+            cont2+=1;
+            contj6+=1;
+
+            if (contj6>acuanto)
+            {
+              contj6 = acuanto;
+            }
+            if (cont2>acuanto)
+            {
+              cont2 = acuanto;
+            }
+            
+            
+            palitos2();
+            console.log("Puntos de "+punta6+ "= "+ contj6)
+        }
+
+        function restaje6()
+        {
+          cont2-=1;
+          contj6-=1;
+
+          if (cont2<0)
+            {
+              cont2 = 0;
+            }
+
+            if (contj6<0)
+            {
+              contj6 = 0;
+            }
+            palitos2();
+            console.log("Puntos de "+punta6+ "= "+ contj6)
+        }
+
+        function sumae2() {
+          if (cont2 < acuanto) {
+            cont2 += 1;
+            console.log(cont2);
+          }
+          if (acuanto == 24 && cont2 > 24) {
+            cont2 = 24;
+            console.log(cont2);
+          }
+          if (acuanto==15 && cont2 > 15)
+          {
+            cont1=15;
+          }
+          if (acuanto==30 && cont2>=30)
+          {
+            alert("Ganó el equipo: "+ ne2);
+          }
+          if (acuanto==24 && cont2>=24)
+          {
+            alert("Ganó el equipo: "+ ne2);
+          }
+          if (acuanto==15 && cont2>=15)
+          {
+            alert("Ganó el equipo: "+ ne2);
+          }
+        }
+
+        function restae1() {
+          if (cont1 > 0) {
+            cont1 -= 1;
+            console.log(cont1);
+          }
+        }
+
+        function restae2() {
+          if (cont2 > 0) {
+            cont2 -= 1;
+            console.log(cont2);
+          }
+        }
+
+        function palitos1()
+        {
+          QPP=cont1;
+          for (var i = 1; i < 7; i++) 
+          {
+            if (acuanto==24 && i==3 && QPP>=2)
+          {
+            $("#p13").attr('src',"2.png")
+            QPP-=2;
+          } else
+          {
+            if (QPP>=5)
+            {
+              $('#p1'+i).attr('src','5.png')
+              QPP=QPP-5;
+              console.log(QPP)
+              
+            } else {
+              $('#p1'+i).attr('src',QPP+'.png')
+              QPP=0
+            }
+          }
+          } 
+        }
+
+        function palitos2()
+        {
+          QPP=cont2;
+          for (var i = 1; i < 7; i++) 
+          {
+            if (acuanto==24 && i==3 && QPP>=2)
+          {
+            $("#p23").attr('src',"2.png")
+            QPP-=2;
+          }else
+          {
+            if (QPP>=5)
+              {
+                $('#p2'+i).attr('src','5.png')
+                QPP=QPP-5;
+                console.log(QPP)
+              } else {
+                $('#p2'+i).attr('src',QPP+'.png')
+                QPP=0
+              }
+          }
+              
+          } 
+        }
+
+      });
+    </script>
+    <br>
+    <br>
+    <br>
+  
+    <div style="width: 100%; height: 100%" id="pant1" class="visible">
+      <div style="text-align: center" class="equipos">
+        <br>
+        <input type="text" placeholder="Equipo 1" id="nombre1" class="in" />
+        <br />
+        <br />
+        <input type="text" placeholder="Equipo 2" id="nombre2" class="in" />
+        <br /><br />
+        <div class="acuanto">
+          <input type="button" class="botones" id="a15" value="15" />
+          <input type="button" class="botones" id="a24" value="24" />
+          <input type="button" class="botones" id="a30" value="30" />
+        </div>
+
+        <div class="puntaE1">
+          <input type="text" placeholder="Nombre jugador 1" id="punta1" class="in" /><br>
+          <input type="text" placeholder="Nombre jugador 3" id="punta3" class="in" /><br>
+          <input type="text" placeholder="Nombre jugador 5" id="punta5" class="in" />
+        </div>
+        <br />
+        <div class="puntaE2">
+          <input type="text" placeholder="Nombre jugador 2" id="punta2" class="in" /><br>
+          <input type="text" placeholder="Nombre jugador 4" id="punta4" class="in" /><br>
+          <input type="text" placeholder="Nombre jugador 6" id="punta6" class="in" />
+        </div>
+        <br>
+        <div class="iniciar">
+          <input type="button" value="Iniciar" id="iniciar" class="ini" />
+        </div>
+      </div>
+    </div>
+
+    <div style="width: 100%; height: 100%" id="pant2" class="oculto">
+      <div style="text-align: center" class="g g4">
+        <div><button id="mas1" class="puntuacion" value="+">+</button></div>
+        <div><h4 style="font: small-caps bold 24px/1 sans-serif"; id="ne1p2">Equipo 1</h5></div>
+        <div><h4 style="font: small-caps bold 24px/1 sans-serif"; id="ne2p2">Equipo 2</h5></div>
+
+        <div><button id="mas2" class="puntuacion" value="+">+</button></div>
+      </div>
+
+      <div style="text-align: center" class="g g2">
+        <img src="0.png" id="p11" class="f" alt="" />
+        <img src="0.png" class="f" id="p21" alt="" />
+        <img src="0.png" id="p12" class="f" alt="" />
+        <img src="0.png" class="f" id="p22" alt="" />
+        <img src="0.png" id="p13" class="f" alt="" />
+        <img src="0.png" class="f" id="p23" alt="" />
+      </div>
+      <hr>
+      <div style="text-align: center" class="g g2">
+        <img src="0.png" class="f" id="p14" alt="" />
+        <img src="0.png" class="f" id="p24" alt="" />
+        <img src="0.png" class="f" id="p15" alt="" />
+        <img src="0.png" class="f" id="p25" alt="" />
+        <img src="0.png" class="f" id="p16" alt="" />
+        <img src="0.png" class="f" id="p26" alt="" />
+      </div>
+      
+      <div style="text-align: center;" class="jugadores g g2">
+        <div class="jugadoresE1 jugadores">
+          <div class="g g3">
+            <img src="suma.png" id="masj1" class="puntuacion img" ></img>
+            <h5 id="J1">JUGADOR 1</h5>
+            <img src="resta.png" id="resj1" class="puntuacion img" ></img>
+          </div>
+          <div class="g g3">
+            <img src="suma.png" id="masj3" class="puntuacion img" value="+"></img>
+            <h5 id="J3">JUGADOR 3</h5>
+            <img src="resta.png" id="resj3" class="puntuacion img" value="-"></img>
+          </div>
+          <div class="g g3">
+            <img src="suma.png" id="masj5" class="puntuacion img" value="+"></img>
+            <h5 id="J5">JUGADOR 5</h5>
+            <img src="resta.png" id="resj5" class="puntuacion img" value="-"></img>
+          </div>
+        </div>
+        <div class="jugadoresE2 jugadores">
+          <div class="g g3">
+            <img src="suma.png" id="masj2" class="puntuacion img" value="+"></img>
+            <h5 id="J2">JUGADOR 2</h5>
+            <img src="resta.png" id="resj2" class="puntuacion img" value="-"></img>
+          </div>
+          <div class="g g3">
+            <img src="suma.png" id="masj4" class="puntuacion img" value="+"></img>
+            <h5 id="J4">JUGADOR 4</h5>
+            <img src="resta.png" id="resj4" class="puntuacion img" value="-"></img>
+          </div>
+          <div class="g g3">
+            <img src="suma.png" id="masj6" class="puntuacion img" value="+"></img>
+            <h5 id="J6">JUGADOR 6</h5>
+            <img src="resta.png" id="resj6" class="puntuacion img" value="-"></img>
+          </div>
+        </div>
+      </div>
+
+      <div class="puntuacionjugadores g g2">
+       <h5 class="txtjugadores" id="puntj1">JUGADOR 1 = 0</h5> <h5 class="txtjugadores" id="puntj2">JUGADOR 2 = 0</h5>
+       
+       <h5 class="txtjugadores" id="puntj3">JUGADOR 3 = 0</h5>  <h5 class="txtjugadores" id="puntj4">JUGADOR 4 = 0</h5>
+       
+       <h5 class="txtjugadores" id="puntj5">JUGADOR 5 = 0</h5>  <h5 class="txtjugadores" id="puntj6">JUGADOR 6 = 0</h5>
+      </div>
+      
+      <div style="text-align: center" class="g g5">
+        <div><button id="res1" class="puntuacion" value="-">-</button></div>
+        <div><h4 style="font: small-caps bold 24px/1 sans-serif"; id="puntuacion1">0</h5></div>
+        
+          <div>
+          <button id="fin"  >Fin</button>
+          
+          <button id="reiniciar" style="font: small-caps bold 24px/1 sans-serif;">Reiniciar</button>
+        </div>
+        <div><h4 style="font: small-caps bold 24px/1 sans-serif"; id="puntuacion2">0</h5></div>
+        <div><button id="res2" class="puntuacion" value="-">-</button></div>
+      </div>
+    </div>
+  </body>
+</html>
